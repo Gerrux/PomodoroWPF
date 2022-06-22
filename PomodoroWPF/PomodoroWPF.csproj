@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Icons\close.png" />
+    <None Remove="Assets\Icons\icon.ico" />
+    <None Remove="Assets\Icons\pause.png" />
+    <None Remove="Assets\Icons\play.png" />
+    <None Remove="Assets\Icons\stop.png" />
+    <None Remove="icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icons\close.png" />
+    <Resource Include="Assets\Icons\icon.ico" />
+    <Resource Include="Assets\Icons\pause.png" />
+    <Resource Include="Assets\Icons\play.png" />
+    <Resource Include="Assets\Icons\stop.png" />
+    <Resource Include="Assets\Icons\icon.png" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Content Include=".\Assets\Fonts\DigitalNumbers-Regular.ttf">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ViewModels\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+	</ItemGroup>
+</Project>
