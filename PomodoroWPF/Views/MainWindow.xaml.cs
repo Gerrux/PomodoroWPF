@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using PomodoroWPF.ViewModels;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PomodoroWPF
@@ -11,6 +12,7 @@ namespace PomodoroWPF
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
         }
 
         #region Draggable window

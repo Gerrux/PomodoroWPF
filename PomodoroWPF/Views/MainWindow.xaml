@@ -21,7 +21,7 @@
             <StackPanel>
                 <TextBlock FontFamily="{StaticResource DigitalNumbers}" 
                        FontSize="16" 
-                       Text="work time"
+                       Text="{Binding TimerStatus}"
                        Foreground="Red" 
                        Margin="20 20 20 0"/>
                 <Grid>
@@ -41,7 +41,7 @@
                     </TextBlock>
                     <TextBlock FontFamily="{StaticResource DigitalNumbers}" 
                                FontSize="80" 
-                               Text="25:00"
+                               Text="{Binding TimeString}"
                                Foreground="#00FF38" 
                                HorizontalAlignment="Center"
                                Margin="20 -5 20 0">
@@ -64,7 +64,8 @@
                             BorderBrush="{x:Null}" 
                             Foreground="{x:Null}"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
+                            VerticalAlignment="Center"
+                            Command="{Binding StopTimerCommand}">
                         <Image Source="/Assets/Icons/stop.png" />
                     </Button>
                     <Button Background="{x:Null}"
@@ -74,7 +75,8 @@
                             Margin="20,0,20,0" 
                             Foreground="{x:Null}"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
+                            VerticalAlignment="Center"
+                            Command="{Binding StartPauseTimerCommand}">
                         <Image Source="/Assets/Icons/play.png" />
                     </Button>
                     <Button Background="{x:Null}"
