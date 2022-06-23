@@ -20,9 +20,10 @@ namespace PomodoroWPF.ViewModels
             StopTimerCommand = new DelegateCommand(c => {
                 TimerCurrentTime = 5 + 1;
                 timer.Stop();
-                TimeString = ("00" + (TimerTime / 60).ToString())[^2..] + ":" + ("00" + (TimerTime % 60).ToString())[^2..];
+                TimeString = SetTimeString(TimerTime);
                 if (IsPlayed)
                     IsPlayed = false;
+                TimerStatus = "work time";
             });
 
             StartPauseTimerCommand = new DelegateCommand(c => {
@@ -55,9 +56,12 @@ namespace PomodoroWPF.ViewModels
                 SetProperty(ref timerStatus, value);
             }
         }
+        private static string SetTimeString(int time)
+        {
+            return ("00" + (time / 60).ToString())[^2..] + ":" + ("00" + (time % 60).ToString())[^2..];
+        }
 
-
-        private string timeString = ("00" + (TimerTime / 60).ToString())[^2..] + ":" + ("00" + (TimerTime % 60).ToString())[^2..];
+        private string timeString = SetTimeString(TimerTime);
         private DispatcherTimer timer;
 
         public string TimeString
@@ -74,18 +78,18 @@ namespace PomodoroWPF.ViewModels
             if (TimerCurrentTime != 0)
             {
                 TimerCurrentTime -= 1;
-                int minutes = TimerCurrentTime / 60;
-                int seconds = TimerCurrentTime % 60;
-                TimeString = ("00" + minutes.ToString())[^2..] + ":" + ("00" + seconds.ToString())[^2..];
+                TimeString = SetTimeString(TimerCurrentTime);
             }
             else
             {
                 timer.Stop();
                 TimerStatus = "Rest time";
                 TimerCurrentTime = 300;
+                TimeString = SetTimeString(TimerCurrentTime);
                 timer.Start();
             }
         }
+
 
         public bool IsPlayed = false;
         public int TimerCurrentTime { get; set; }
