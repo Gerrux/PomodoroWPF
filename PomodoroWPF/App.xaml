@@ -8,7 +8,6 @@
         <ResourceDictionary>
             <FontFamily x:Key="DigitalNumbers">./Assets/Fonts/digitalnumbers-regular.ttf#Digital Numbers</FontFamily>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="\Assets\BgStyleDictionary.xaml"/>
                 <ResourceDictionary Source="\Assets\MiniButtonStyleDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

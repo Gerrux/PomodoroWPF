@@ -15,17 +15,17 @@
             <UniformGrid Margin="10 15 0 0" Columns="2">
                 <TextBlock Text="Work time: "/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI"/>
+                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI" Text="{Binding WorkMinutes}"/>
                     <TextBlock Text=" : "/>
-                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI"/>
+                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI" Text="{Binding WorkSeconds}"/>
                 </StackPanel>
             </UniformGrid>
             <UniformGrid Margin="10 15 0 0" Columns="2">
                 <TextBlock Text="Rest time: "/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI"/>
+                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI" Text="{Binding RestMinutes}"/>
                     <TextBlock Text=" : "/>
-                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI"/>
+                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI" Text="{Binding RestSeconds}"/>
                 </StackPanel>
             </UniformGrid>
             <UniformGrid Margin="10 15 10 0" Columns="2">
