@@ -1,9 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
 
-    <RadialGradientBrush x:Key="BgGradientBrush">
-        <GradientStop Color="black"  Offset="0.44"/>
-        <GradientStop Color="black" Offset="0.8"/>
-    </RadialGradientBrush>
     
 </ResourceDictionary>

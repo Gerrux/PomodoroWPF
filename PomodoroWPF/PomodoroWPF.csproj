@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <None Remove="Assets\Icons\close.png" />
-    <None Remove="Assets\Icons\icon.ico" />
     <None Remove="Assets\Icons\pause.png" />
     <None Remove="Assets\Icons\play.png" />
     <None Remove="Assets\Icons\stop.png" />
@@ -18,11 +17,12 @@
 
   <ItemGroup>
     <Resource Include="Assets\Icons\close.png" />
-    <Resource Include="Assets\Icons\icon.ico" />
     <Resource Include="Assets\Icons\pause.png" />
     <Resource Include="Assets\Icons\play.png" />
     <Resource Include="Assets\Icons\stop.png" />
-    <Resource Include="Assets\Icons\icon.png" />
+    <Resource Include="Assets\Icons\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 	<ItemGroup>
@@ -33,5 +33,17 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Assets\Icons\icon.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\notify_sound.mp3">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\sound.mp3">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 </Project>

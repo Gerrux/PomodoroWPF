@@ -1,5 +1,9 @@
-﻿using PomodoroWPF.ViewModels;
+﻿using PomodoroWPF.Services;
+using PomodoroWPF.ViewModels;
+using PomodoroWPF.Views;
+using System;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace PomodoroWPF
@@ -12,7 +16,43 @@ namespace PomodoroWPF
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
+            double workHeight = SystemParameters.WorkArea.Height;
+            double workWidth = SystemParameters.WorkArea.Width;
+            this.Top = (workHeight - this.Height);
+            this.Left = (workWidth - this.Width);
+            NotifyIcon ni = new NotifyIcon();
+            ni.Icon = new System.Drawing.Icon("Assets/Icons/icon.ico");
+            ni.Visible = true;
+            ni.Text = "PomodoroTimer";
+            ni.ContextMenuStrip = new ContextMenuStrip();
+            ni.ContextMenuStrip.Items.Add("Settings", null, OnSettingsClicked);
+            ni.ContextMenuStrip.Items.Add("Exit", null, OnExitClicked);
+            ni.DoubleClick += delegate (object sender,
+                                        EventArgs args)
+                {
+                    if (WindowState.Equals(WindowState.Minimized))
+                    {
+                        this.Show();
+                        this.WindowState = WindowState.Normal;
+                    }
+                    else
+                    {
+                        this.Hide();
+                        this.WindowState = WindowState.Minimized;
+                    }
+                };
+            this.DataContext = new MainWindowViewModel(new NotifyIconNotificationService(ni));
+        }
+
+        private void OnSettingsClicked(object? sender, EventArgs e)
+        {
+            SettingsWindow settingsWindow = new();
+            settingsWindow.Show();
+        }
+
+        private void OnExitClicked(object sender, EventArgs e)
+        {
+            Close();
         }
 
         #region Draggable window
@@ -25,7 +65,7 @@ namespace PomodoroWPF
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            WindowState = WindowState.Minimized;
         }
     }
 }
