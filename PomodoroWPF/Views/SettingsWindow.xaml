@@ -29,8 +29,8 @@
                 </StackPanel>
             </UniformGrid>
             <UniformGrid Margin="10 15 10 0" Columns="2">
-                <Button Width="Auto" Margin="0 0 20 0" Padding="0 5">Reset</Button>
-                <Button Width="Auto" Margin="20 0 0 0" Padding="0 5">Accept</Button>
+                <Button Width="Auto" Margin="0 0 20 0" Padding="0 5" Command="{Binding ResetTime}">Reset</Button>
+                <Button Width="Auto" Margin="20 0 0 0" Padding="0 5" Command="{Binding AcceptTime}">Accept</Button>
             </UniformGrid>
         </StackPanel>
     </Grid>

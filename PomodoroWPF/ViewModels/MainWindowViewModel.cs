@@ -14,7 +14,6 @@ namespace PomodoroWPF.ViewModels
         public MainWindowViewModel(INotificationService notificationService)
         {
             _notificationService = notificationService;
-
             InitCommands();
         }
         public void InitCommands()
@@ -22,7 +21,7 @@ namespace PomodoroWPF.ViewModels
             timer = new DispatcherTimer();
             timer.Tick += new EventHandler(TimerTick);
             timer.Interval = new TimeSpan(0, 0, 1);
-            TimerCurrentTime = WorkTime + 1;
+            TimerCurrentTime = Properties.Settings.Default.work_time + 1;
             StopTimerCommand = new DelegateCommand(c =>
             {
                 SetWorkTime();
@@ -64,10 +63,10 @@ namespace PomodoroWPF.ViewModels
         }
         private static string SetTimeString(int time)
         {
-            return ("00" + (time / 60).ToString())[^2..] + ":" + ("00" + (time % 60).ToString())[^2..];
+            return ("0" + (time / 60).ToString())[^2..] + ":" + ("00" + (time % 60).ToString())[^2..];
         }
 
-        private string timeString = SetTimeString(WorkTime);
+        private string timeString = SetTimeString(Properties.Settings.Default.work_time);
         private DispatcherTimer timer;
 
         public string TimeString
@@ -129,14 +128,14 @@ namespace PomodoroWPF.ViewModels
         private void SetWorkTime()
         {
             TimerStatus = "Work time";
-            TimerCurrentTime = WorkTime;
+            TimerCurrentTime = Properties.Settings.Default.work_time;
             TimeString = SetTimeString(TimerCurrentTime);
         }
 
         private void SetRestTime()
         {
             TimerStatus = "Rest time";
-            TimerCurrentTime = RestTime;
+            TimerCurrentTime = Properties.Settings.Default.rest_time;
             TimeString = SetTimeString(TimerCurrentTime);
         }
 
@@ -152,8 +151,6 @@ namespace PomodoroWPF.ViewModels
         }
         public bool IsRestTime = false;
         public int TimerCurrentTime { get; set; }
-        public static int WorkTime = 5;
-        public static int RestTime = 300;
         private readonly INotificationService _notificationService;
     }
 }
