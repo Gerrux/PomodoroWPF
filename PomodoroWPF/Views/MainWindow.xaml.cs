@@ -2,7 +2,9 @@
 using PomodoroWPF.ViewModels;
 using PomodoroWPF.Views;
 using System;
+using System.Globalization;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -13,6 +15,8 @@ namespace PomodoroWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowViewModel _viewModel;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -20,6 +24,7 @@ namespace PomodoroWPF
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height);
             this.Left = (workWidth - this.Width);
+
             NotifyIcon ni = new NotifyIcon();
             ni.Icon = new System.Drawing.Icon("Assets/Icons/icon.ico");
             ni.Visible = true;
@@ -27,21 +32,23 @@ namespace PomodoroWPF
             ni.ContextMenuStrip = new ContextMenuStrip();
             ni.ContextMenuStrip.Items.Add("Settings", null, OnSettingsClicked);
             ni.ContextMenuStrip.Items.Add("Exit", null, OnExitClicked);
-            ni.DoubleClick += delegate (object sender,
-                                        EventArgs args)
+            ni.DoubleClick += delegate (object sender, EventArgs args)
+            {
+                if (WindowState.Equals(WindowState.Minimized))
                 {
-                    if (WindowState.Equals(WindowState.Minimized))
-                    {
-                        this.Show();
-                        this.WindowState = WindowState.Normal;
-                    }
-                    else
-                    {
-                        this.Hide();
-                        this.WindowState = WindowState.Minimized;
-                    }
-                };
-            this.DataContext = new MainWindowViewModel(new NotifyIconNotificationService(ni));
+                    this.Show();
+                    this.WindowState = WindowState.Normal;
+                }
+                else
+                {
+                    this.Hide();
+                    this.WindowState = WindowState.Minimized;
+                }
+            };
+
+            // Initialize ViewModel with necessary services
+            _viewModel = new MainWindowViewModel(new NotifyIconNotificationService(ni));
+            this.DataContext = _viewModel;
         }
 
         private void OnSettingsClicked(object? sender, EventArgs e)

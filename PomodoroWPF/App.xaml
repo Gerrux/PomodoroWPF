@@ -9,8 +9,11 @@
             <FontFamily x:Key="DigitalNumbers">./Assets/Fonts/digitalnumbers-regular.ttf#Digital Numbers</FontFamily>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="\Assets\MiniButtonStyleDictionary.xaml"/>
+                <ResourceDictionary Source="\Assets\ColorCircleButtonStyleDictionary.xaml" />
+                <ResourceDictionary Source="\Assets\Icons.xaml"/>
+                <ResourceDictionary Source="\Assets\ThemeColors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        </ResourceDictionary> 
         
     </Application.Resources>
 </Application>

@@ -3,12 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:PomodoroWPF"
+        xmlns:converters="clr-namespace:PomodoroWPF.Converters"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
         Title="Pomodoro" 
-        Height="175" 
+        Height="235" 
         Width="350"
         AllowsTransparency="True"
         Background="Transparent"
@@ -18,120 +20,122 @@
         ShowInTaskbar="False"
         Icon="/Assets/Icons/icon.png">
     <Window.Resources>
-        <Style TargetType="{x:Type Border}">
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <RadialGradientBrush  Opacity="0.8">
-                                <GradientStop Color="black"  Offset="0.44"/>
-                                <GradientStop Color="black" Offset="0.8"/>
-                            </RadialGradientBrush>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="False">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <RadialGradientBrush Opacity="0.5">
-                                <GradientStop Color="black"  Offset="0.44"/>
-                                <GradientStop Color="black" Offset="0.8"/>
-                            </RadialGradientBrush>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <converters:PositionToMarginConverter x:Key="PositionToMarginConverter" />
+        <converters:BooleanToScaleXConverter x:Key="BooleanToScaleXConverter" />
+        <converters:HexToBrushConverter x:Key="HexToBrushConverter" />
     </Window.Resources>
-    <Border CornerRadius="25">
-        <Grid>
-            <StackPanel>
-                <TextBlock FontFamily="{StaticResource DigitalNumbers}" 
-                       FontSize="16" 
-                       Text="{Binding TimerStatus}"
-                       Foreground="Red" 
-                       Margin="20 20 20 0"/>
-                <Grid>
+    <StackPanel Margin="0">
+        <!-- Прозрачная GIF-анимация -->
+        <Canvas>
+            <!-- Устанавливаем более высокий ZIndex -->
+            <Image gif:ImageBehavior.AnimatedSource="{Binding CurrentGifSource}" 
+                   Width="75"
+                   Height="75"
+                   IsHitTestVisible="False"
+                   Canvas.Left="{Binding GifPosition}"
+                   VerticalAlignment="Bottom"
+                   RenderTransformOrigin="0.5,0.5">
+                <!-- Центрируем трансформацию для корректного отражения -->
+                <Image.RenderTransform>
+                    <ScaleTransform ScaleX="{Binding IsFlipped, Converter={StaticResource BooleanToScaleXConverter}}" />
+                </Image.RenderTransform>
+            </Image>
+        </Canvas>
+        <Border CornerRadius="25" Width="350" Height="160"
+                Margin="0 75 0 0">
+            <Border.Background>
+                <ImageBrush ImageSource="{Binding CurrentBackground}"/>
+            </Border.Background>
+            <Grid>
+                <StackPanel>
                     <TextBlock FontFamily="{StaticResource DigitalNumbers}" 
-                               FontSize="80" 
-                               Text="00:00"
-                               Foreground="#00FF38" 
-                               HorizontalAlignment="Center"
-                               Opacity="0.15"
-                               Margin="20 -5 20 0">
-                        <TextBlock.Effect>
-                            <DropShadowEffect BlurRadius="4" 
-                                              ShadowDepth="-2" 
-                                              Color="#00FF38"
-                                              Opacity="0.3"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <TextBlock FontFamily="{StaticResource DigitalNumbers}" 
-                               FontSize="80" 
-                               Text="{Binding TimeString}"
-                               Foreground="#00FF38" 
-                               HorizontalAlignment="Center"
-                               Margin="20 -5 20 0">
-                        <TextBlock.Effect>
-                            <DropShadowEffect BlurRadius="4" 
-                                              ShadowDepth="2" 
-                                              Color="#00FF38"
-                                              Opacity="0.3"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-                </Grid>
-                <StackPanel Orientation="Horizontal" 
-                            HorizontalAlignment="Center">
-                    <StackPanel.Resources>
-                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MiniButton}"/>
-                    </StackPanel.Resources>
-                    <Button Background="{x:Null}"
-                            Width="24"
-                            Height="24" 
-                            BorderBrush="{x:Null}" 
-                            Foreground="{x:Null}"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Command="{Binding StopTimerCommand}">
-                        <Image Source="/Assets/Icons/stop.png" />
-                    </Button>
-                    <Button Background="{x:Null}"
-                            Width="24"
-                            Height="24"
-                            BorderBrush="{x:Null}" 
-                            Margin="20,0,20,0" 
-                            Foreground="{x:Null}"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Command="{Binding StartPauseTimerCommand}">
-                        <Image>
-                            <Image.Style>
-                                <Style TargetType="{x:Type Image}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsPaused}" Value="true">
-                                            <Setter Property="Source" Value="/Assets/Icons/play.png"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsPaused}" Value="false">
-                                            <Setter Property="Source" Value="/Assets/Icons/pause.png"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </Button>
-                    <Button Background="{x:Null}"
-                            Width="24"
-                            Height="24"
-                            BorderBrush="{x:Null}" 
-                            Click="Close_Click" 
-                            Foreground="{x:Null}"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                        <Image Source="/Assets/Icons/close.png" />
-                    </Button>
+                               HorizontalAlignment="Left"
+                               FontSize="16" 
+                               Text="{Binding TimerStatus}"
+                               Foreground="{Binding TextBrush}" 
+                               Opacity="0.8"
+                               Margin="20 8 20 0"/>
+                    <Grid>
+                        <TextBlock FontFamily="{StaticResource DigitalNumbers}" 
+                                   FontSize="80" 
+                                   Text="88:88"
+                                   Foreground="#A4A4A4" 
+                                   HorizontalAlignment="Center"
+                                   Opacity="0.15"
+                                   Margin="20 -5 20 0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="4" 
+                                                  ShadowDepth="-2" 
+                                                  Color="#A4A4A4"
+                                                  Opacity="0.3"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock FontFamily="{StaticResource DigitalNumbers}" 
+                                   FontSize="80" 
+                                   Text="{Binding TimeString}"
+                                   Foreground="{Binding TextBrush}" 
+                                   HorizontalAlignment="Center"
+                                   Margin="20 -5 20 0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="4" 
+                                                  ShadowDepth="2" 
+                                                  Color="{Binding TextBrush}"
+                                                  Opacity="0.3"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" 
+                               HorizontalAlignment="Center">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MiniButton}"/>
+                        </StackPanel.Resources>
+                        <Button Background="Transparent"
+                                Width="24"
+                                Height="24" 
+                                BorderBrush="Transparent" 
+                                Foreground="Transparent"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Command="{Binding StopTimerCommand}">
+                            <Image Source="/Assets/Icons/stop.png" />
+                        </Button>
+                        <Button Background="Transparent"
+                                Width="24"
+                                Height="24"
+                                BorderBrush="Transparent" 
+                                Margin="20,0,20,0" 
+                                Foreground="Transparent"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Command="{Binding StartPauseTimerCommand}">
+                            <Image>
+                                <Image.Style>
+                                    <Style TargetType="{x:Type Image}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsPaused}" Value="true">
+                                                <Setter Property="Source" Value="/Assets/Icons/play.png"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsPaused}" Value="false">
+                                                <Setter Property="Source" Value="/Assets/Icons/pause.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Button>
+                        <Button Background="Transparent"
+                                Width="24"
+                                Height="24"
+                                BorderBrush="Transparent" 
+                                Click="Close_Click" 
+                                Foreground="Transparent"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            <Image Source="/Assets/Icons/close.png" />
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
-
-            </StackPanel>
-        </Grid>
-    </Border>
+            </Grid>
+        </Border>
+    </StackPanel>
 </Window>

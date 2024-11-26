@@ -9,26 +9,57 @@
                     <Grid x:Name="grid">
                         <Border x:Name="border" Height="Auto" 
                                 CornerRadius="5" 
-                                BorderBrush="#00000000" 
-                                BorderThickness="1">
+                                BorderBrush="Transparent" 
+                                BorderThickness="1"
+                                Opacity="0.7">
                             <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center">
-                            </ContentPresenter>
+                                              VerticalAlignment="Center"/>
                         </Border>
+                        <!-- Определение VisualStateManager -->
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <!-- Состояние Normal -->
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="border"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0.7"
+                                                         Duration="0:0:0.15"/>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <!-- Состояние MouseOver -->
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="border"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0:0:0.15"/>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <!-- Состояние Pressed -->
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="border"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0.5"
+                                                         Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <!-- Состояние Disabled -->
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="grid"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0.25"
+                                                         Duration="0:0:0.15"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="border"  Value="#00000000"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#00000000"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#3FFFFFFF"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#00000000"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

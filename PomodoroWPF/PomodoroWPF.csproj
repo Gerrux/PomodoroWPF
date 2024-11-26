@@ -8,7 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Animations\fastrun.gif" />
+    <None Remove="Assets\Animations\rest.gif" />
+    <None Remove="Assets\Animations\run.gif" />
+    <None Remove="Assets\Animations\stay.gif" />
+    <None Remove="Assets\Backgrounds\classic\bg_blue.png" />
+    <None Remove="Assets\Backgrounds\classic\bg_orange.png" />
+    <None Remove="Assets\Backgrounds\classic\bg_purple.png" />
+    <None Remove="Assets\Backgrounds\classic\bg_red.png" />
+    <None Remove="Assets\Backgrounds\classic\bg_white.png" />
+    <None Remove="Assets\bg.png" />
     <None Remove="Assets\Icons\close.png" />
+    <None Remove="Assets\Icons\custom_color.png" />
     <None Remove="Assets\Icons\pause.png" />
     <None Remove="Assets\Icons\play.png" />
     <None Remove="Assets\Icons\stop.png" />
@@ -16,7 +27,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Animations\fastrun.gif" />
+    <Resource Include="Assets\Animations\rest.gif" />
+    <Resource Include="Assets\Animations\stay.gif" />
+    <Resource Include="Assets\Animations\run.gif" />
+    <Resource Include="Assets\Backgrounds\classic\bg_blue.png" />
+    <Resource Include="Assets\Backgrounds\classic\bg_green.png" />
+    <Resource Include="Assets\Backgrounds\classic\bg_orange.png" />
+    <Resource Include="Assets\Backgrounds\classic\bg_purple.png" />
+    <Resource Include="Assets\Backgrounds\classic\bg_red.png" />
+    <Resource Include="Assets\Backgrounds\classic\bg_white.png" />
     <Resource Include="Assets\Icons\close.png" />
+    <Resource Include="Assets\Icons\custom_color.png" />
     <Resource Include="Assets\Icons\pause.png" />
     <Resource Include="Assets\Icons\play.png" />
     <Resource Include="Assets\Icons\stop.png" />
@@ -33,6 +55,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+	  <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -9,28 +9,64 @@
         ResizeMode="NoResize"
         Icon="/Assets/Icons/icon.png"
         WindowStartupLocation="CenterScreen"
-        Title="Settings" Height="160" Width="230">
+        Title="Settings" Height="220" Width="200">
     <Grid>
         <StackPanel Orientation="Vertical">
+            <!-- Work Time -->
             <UniformGrid Margin="10 15 0 0" Columns="2">
-                <TextBlock Text="Work time: "/>
+                <TextBlock Text="Work time: " FontWeight="Medium"/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI" Text="{Binding WorkMinutes}"/>
+                    <TextBox Width="30" MaxLength="2" TextAlignment="Center"
+                             PreviewTextInput="InputDigit_PTI"
+                             Text="{Binding WorkMinutes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
                     <TextBlock Text=" : "/>
-                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI" Text="{Binding WorkSeconds}"/>
+                    <TextBox Width="30" MaxLength="2" TextAlignment="Center"
+                             PreviewTextInput="InputDigit_PTI"
+                             Text="{Binding WorkSeconds, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
                 </StackPanel>
             </UniformGrid>
+
+            <!-- Rest Time -->
             <UniformGrid Margin="10 15 0 0" Columns="2">
-                <TextBlock Text="Rest time: "/>
+                <TextBlock Text="Rest time: " FontWeight="Medium"/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI" Text="{Binding RestMinutes}"/>
+                    <TextBox Width="30" MaxLength="2" TextAlignment="Center"
+                             PreviewTextInput="InputDigit_PTI"
+                             Text="{Binding RestMinutes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
                     <TextBlock Text=" : "/>
-                    <TextBox Width="30" MaxLength="2" TextAlignment="Center" PreviewTextInput="InputDigit_PTI" Text="{Binding RestSeconds}"/>
+                    <TextBox Width="30" MaxLength="2" TextAlignment="Center"
+                             PreviewTextInput="InputDigit_PTI"
+                             Text="{Binding RestSeconds, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
                 </StackPanel>
             </UniformGrid>
-            <UniformGrid Margin="10 15 10 0" Columns="2">
-                <Button Width="Auto" Margin="0 0 20 0" Padding="0 5" Command="{Binding ResetTime}">Reset</Button>
-                <Button Width="Auto" Margin="20 0 0 0" Padding="0 5" Command="{Binding AcceptTime}">Accept</Button>
+
+            <!-- Color Picker -->
+            <StackPanel Margin="10 15 0 0">
+                <TextBlock Text="Color: " FontWeight="Medium"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 5">
+                    <Button Background="Green" Style="{StaticResource ColorCircleButtonStyle}" 
+                    Command="{Binding ChangeThemeCommand}" CommandParameter="Green" />
+                    <Button Background="Red" Style="{StaticResource ColorCircleButtonStyle}" 
+                    Command="{Binding ChangeThemeCommand}" CommandParameter="Red" />
+                    <Button Background="LightBlue" Style="{StaticResource ColorCircleButtonStyle}" 
+                    Command="{Binding ChangeThemeCommand}" CommandParameter="Blue" />
+                    <Button Background="Purple" Style="{StaticResource ColorCircleButtonStyle}" 
+                    Command="{Binding ChangeThemeCommand}" CommandParameter="Purple" />
+                    <Button Background="White" Style="{StaticResource ColorCircleButtonStyle}" 
+                    Command="{Binding ChangeThemeCommand}" CommandParameter="White" />
+                    <Button Background="Orange" Style="{StaticResource ColorCircleButtonStyle}" 
+                    Command="{Binding ChangeThemeCommand}" CommandParameter="Orange" />
+                    <Button Style="{StaticResource CustomCircleButtonStyle}" 
+                    Command="{Binding OpenCustomColorPickerCommand}" />
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Buttons -->
+            <UniformGrid Margin="10 10 10 0" Columns="2">
+                <Button Width="Auto" Margin="0 0 30 0" Padding="0 5"
+                        Command="{Binding ResetTime}" FontWeight="Medium">Reset</Button>
+                <Button Width="Auto" Margin="10 0 20 0" Padding="0 5" 
+                        Command="{Binding AcceptTime}" FontWeight="Medium">Accept</Button>
             </UniformGrid>
         </StackPanel>
     </Grid>

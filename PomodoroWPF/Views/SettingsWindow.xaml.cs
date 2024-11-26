@@ -1,12 +1,11 @@
-﻿using PomodoroWPF.ViewModels;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Forms;
+using PomodoroWPF.ViewModels; // Add reference to System.Windows.Forms
 
 namespace PomodoroWPF.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для SettingsWindow.xaml
-    /// </summary>
     public partial class SettingsWindow : Window
     {
         public SettingsWindow()
@@ -22,9 +21,7 @@ namespace PomodoroWPF.Views
 
         private void CheckIsNumeric(TextCompositionEventArgs e)
         {
-            int result;
-
-            if (!int.TryParse(e.Text, out result))
+            if (!int.TryParse(e.Text, out _))
             {
                 e.Handled = true;
             }
