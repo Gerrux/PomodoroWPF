@@ -6,13 +6,21 @@ namespace PomodoroWPF.Services
 {
     public class SettingsService
     {
-        private const string SettingsFilePath = "settings.json";
+        private static readonly string SettingsFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PomodoroWPF");
+        private static readonly string SettingsFilePath = Path.Combine(SettingsFolderPath, "settings.json");
         private static SettingsService _instance;
         public static SettingsService Instance => _instance ??= new SettingsService();
 
         public event EventHandler SettingsChanged;
 
-        private SettingsService() { }
+        private SettingsService()
+        {
+            // Создаём папку, если она отсутствует
+            if (!Directory.Exists(SettingsFolderPath))
+            {
+                Directory.CreateDirectory(SettingsFolderPath);
+            }
+        }
 
         public AppSettings LoadSettings()
         {
@@ -22,13 +30,16 @@ namespace PomodoroWPF.Services
                 return JsonSerializer.Deserialize<AppSettings>(json);
             }
 
-            return new AppSettings
+            // Если файл отсутствует, создаём его с настройками по умолчанию
+            var defaultSettings = new AppSettings
             {
                 WorkTimeSeconds = 1500,
                 RestTimeSeconds = 300,
                 SelectedTextColor = "#00FF38",
                 SelectedBackgroundImagePath = "../Assets/Backgrounds/classic/bg_green.png"
             };
+            SaveSettings(defaultSettings);
+            return defaultSettings;
         }
 
         public void SaveSettings(AppSettings settings)

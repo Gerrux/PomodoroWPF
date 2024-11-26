@@ -2,9 +2,7 @@
 using PomodoroWPF.ViewModels;
 using PomodoroWPF.Views;
 using System;
-using System.Globalization;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
 

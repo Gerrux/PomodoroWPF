@@ -1,8 +1,6 @@
-﻿using System.Windows;
+﻿using PomodoroWPF.ViewModels; // Add reference to System.Windows.Forms
+using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Forms;
-using PomodoroWPF.ViewModels; // Add reference to System.Windows.Forms
 
 namespace PomodoroWPF.Views
 {
