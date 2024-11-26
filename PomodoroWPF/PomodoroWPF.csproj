@@ -18,11 +18,7 @@
     <None Remove="Assets\Backgrounds\classic\bg_red.png" />
     <None Remove="Assets\Backgrounds\classic\bg_white.png" />
     <None Remove="Assets\bg.png" />
-    <None Remove="Assets\Icons\close.png" />
     <None Remove="Assets\Icons\custom_color.png" />
-    <None Remove="Assets\Icons\pause.png" />
-    <None Remove="Assets\Icons\play.png" />
-    <None Remove="Assets\Icons\stop.png" />
     <None Remove="icon.png" />
   </ItemGroup>
 
@@ -37,11 +33,7 @@
     <Resource Include="Assets\Backgrounds\classic\bg_purple.png" />
     <Resource Include="Assets\Backgrounds\classic\bg_red.png" />
     <Resource Include="Assets\Backgrounds\classic\bg_white.png" />
-    <Resource Include="Assets\Icons\close.png" />
     <Resource Include="Assets\Icons\custom_color.png" />
-    <Resource Include="Assets\Icons\pause.png" />
-    <Resource Include="Assets\Icons\play.png" />
-    <Resource Include="Assets\Icons\stop.png" />
     <Resource Include="Assets\Icons\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

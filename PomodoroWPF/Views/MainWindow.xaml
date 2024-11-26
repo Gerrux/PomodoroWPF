@@ -84,56 +84,48 @@
                             </TextBlock.Effect>
                         </TextBlock>
                     </Grid>
-                    <StackPanel Orientation="Horizontal" 
-                               HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <StackPanel.Resources>
-                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MiniButton}"/>
+                            <!-- Базовый стиль для кнопок с расширенной областью -->
+                            <Style TargetType="Button" BasedOn="{StaticResource MiniButton}"/>
                         </StackPanel.Resources>
-                        <Button Background="Transparent"
-                                Width="24"
-                                Height="24" 
-                                BorderBrush="Transparent" 
-                                Foreground="Transparent"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Command="{Binding StopTimerCommand}">
-                            <Image Source="/Assets/Icons/stop.png" />
+
+                        <!-- Кнопка "Стоп" -->
+                        <Button Command="{Binding StopTimerCommand}">
+                            <Viewbox Width="15" Height="15">
+                                <Path Data="{StaticResource StopIconGeometry}" 
+                                  Style="{StaticResource IconStyle}" 
+                                  Fill="{Binding TextBrush}"/>
+                            </Viewbox>
                         </Button>
-                        <Button Background="Transparent"
-                                Width="24"
-                                Height="24"
-                                BorderBrush="Transparent" 
-                                Margin="20,0,20,0" 
-                                Foreground="Transparent"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Command="{Binding StartPauseTimerCommand}">
-                            <Image>
-                                <Image.Style>
-                                    <Style TargetType="{x:Type Image}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsPaused}" Value="true">
-                                                <Setter Property="Source" Value="/Assets/Icons/play.png"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding IsPaused}" Value="false">
-                                                <Setter Property="Source" Value="/Assets/Icons/pause.png"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                            </Image>
+
+                        <!-- Кнопка "Плей/Пауза" -->
+                        <Button Margin="25,0,20,0" Command="{Binding StartPauseTimerCommand}">
+                            <Viewbox Width="18" Height="18">
+                                <Path Fill="{Binding TextBrush}">
+                                    <Path.Style>
+                                        <Style TargetType="Path" BasedOn="{StaticResource IconStyle}">
+                                            <Setter Property="Data" Value="{StaticResource PauseIconGeometry}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsPaused}" Value="true">
+                                                    <Setter Property="Data" Value="{StaticResource PlayIconGeometry}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                </Path>
+                            </Viewbox>
                         </Button>
-                        <Button Background="Transparent"
-                                Width="24"
-                                Height="24"
-                                BorderBrush="Transparent" 
-                                Click="Close_Click" 
-                                Foreground="Transparent"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                            <Image Source="/Assets/Icons/close.png" />
+
+                        <!-- Кнопка "Закрыть" -->
+                        <Button Click="Close_Click">
+                            <Viewbox Width="18" Height="18">
+                                <Path Data="{StaticResource CloseIconGeometry}" 
+                  Fill="{Binding TextBrush}"/>
+                            </Viewbox>
                         </Button>
                     </StackPanel>
+
                 </StackPanel>
             </Grid>
         </Border>

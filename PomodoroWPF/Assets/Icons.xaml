@@ -1,0 +1,33 @@
+﻿<!-- Icons.xaml -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Иконка "Стоп" -->
+    <Geometry x:Key="StopIconGeometry">
+        M2.5 2.5H17.5V17.5H2.5V2.5Z
+    </Geometry>
+
+    <!-- Иконка "Плей" -->
+    <Geometry x:Key="PlayIconGeometry">M5,4 L19,12 L5,20 Z</Geometry>
+
+    <!-- Иконка "Пауза" -->
+    <Geometry x:Key="PauseIconGeometry">
+        M5.26904 0.37458H0.269043V20.3746H5.26904V0.37458ZM18.269 
+        0.37458H13.269V20.3746H18.269V0.37458Z
+    </Geometry>
+
+    <!-- Иконка "Закрыть" (крестик) -->
+    <Geometry x:Key="CloseIconGeometry">
+        M7.1757 10.2089L0.509033 16.8756L3.84237 20.2089L10.509 13.5422L17.1757 20.2089L20.509 
+        16.8756L13.8424 10.2089L20.509 3.54223L17.1757 0.2089L10.509 
+        6.87557L3.84237 0.208906L0.509033 3.54224L7.1757 10.2089Z
+    </Geometry>
+
+    <!-- Общий стиль для иконок -->
+    <Style x:Key="IconStyle" TargetType="Path">
+        <Setter Property="Stretch" Value="Uniform" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+    </Style>
+
+</ResourceDictionary>
